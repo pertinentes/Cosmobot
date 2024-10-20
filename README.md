@@ -1,7 +1,3 @@
-Voici la version révisée avec une écriture fluide :  
-
----
-
 # **Cosmosbot**  
 
 Remade des bots **Cosmos**, **Astro**, et **Celestia** de Naylo (si tu passes par là, je n’ai rien contre toi 👋).  
@@ -18,7 +14,3 @@ Le projet est toujours en cours de développement. Je ne sais pas encore si je v
 - Système de logs.  
 - Système de ticket.  
 - Système de backup.  
-
----
-
-**Auteur** : Adoucir  
