@@ -1,4 +1,13 @@
-# Cosmosbot
-remade du "cosmos bot", "Astro bot" "Celestia bot" de naylo (si tu passe par là j'ai rien contre toi)
+# **Cosmosbot**  
 
-toujours en cours de dev mais je vous donne ce que j'ai déjà fait car je sais pas si je ferais le bot au complet ou non, j'ai apportée quelque amélioration perso comme la gestion des perm des commandes aussi setperm et change pour changer les perm des cmd 
+remade des bots **Cosmos**, **Astro**, et **Celestia** de Naylo (si tu passes par là, je n’ai rien contre toi 👋).  
+
+## Statut : En cours de développement  
+
+Je ne sais pas encore si je vais finir ce projet, mais je partage ce que j’ai déjà.  
+Des **mises à jour** sont prévues toutes les **4 à 7 jours**.  
+
+## À venir  
+- Système de logs.
+- Système de ticket.
+- Système de backup
