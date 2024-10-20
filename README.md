@@ -1,13 +1,24 @@
+Voici la version révisée avec une écriture fluide :  
+
+---
+
 # **Cosmosbot**  
 
-remade des bots **Cosmos**, **Astro**, et **Celestia** de Naylo (si tu passes par là, je n’ai rien contre toi 👋).  
+Remade des bots **Cosmos**, **Astro**, et **Celestia** de Naylo (si tu passes par là, je n’ai rien contre toi 👋).  
 
-## Statut : En cours de développement  
+Le projet est toujours en cours de développement. Je ne sais pas encore si je vais le terminer entièrement, mais je partage ce que j’ai déjà fait. Des mises à jour sont prévues toutes les 4 à 7 jours.  
 
-Je ne sais pas encore si je vais finir ce projet, mais je partage ce que j’ai déjà.  
-Des **mises à jour** sont prévues toutes les **4 à 7 jours**.  
+> J’ai aussi ajouté quelques touches personnelles, comme les commandes :
+> - **setperm** : Attribue une permission spécifique à un rôle pour une commande.
+> - **change** : Permet de modifier la permission d’une commande existante.  
 
-## À venir  
-- Système de logs.
-- Système de ticket.
-- Système de backup
+> *Note : Certaines catégories dans la commande `help` peuvent ne pas s’afficher correctement. Il suffit d’ajouter des commandes pour les rendre visibles.*  
+
+### Commandes à venir  
+- Système de logs.  
+- Système de ticket.  
+- Système de backup.  
+
+---
+
+**Auteur** : Adoucir  
