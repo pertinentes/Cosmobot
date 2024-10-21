@@ -1,17 +1,17 @@
-const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder } = require("discord.js");
+const { EmbedBuilder, ActionRowBuilder, StringSelectMenuBuilder, ButtonBuilder, ButtonStyle } = require("discord.js");
 
 module.exports = {
     name: "change",
     description: "Permet de changer les permissions d'une commande",
-    usage: "change <commande> <perms>",
+    usage: "change <commande>",
     perm: ["owner"],
     async execute(client, message, args) {
 
-        if (args.length < 2) {
-            return message.reply("Usage : `change <commande> <perms>`");
+        if (args.length < 1) {
+            return message.reply("Usage : `change <commande>`");
         }
 
-        const [commandName, ...permissions] = args;
+        const [commandName] = args;
         const command = client.commands.get(commandName.toLowerCase());
 
         if (!command) {
@@ -19,23 +19,27 @@ module.exports = {
         }
 
         const guildId = message.guildId;
-        await client.db.set(`permissions_${guildId}_${commandName.toLowerCase()}`, permissions.join(','));
+        const currentPerms = await client.db.get(`permissions_${guildId}_${commandName.toLowerCase()}`) || '';
 
-        const embed = new EmbedBuilder()
+        const createEmbed = (perms) => new EmbedBuilder()
             .setColor(client.colors.green)
-            .setTitle('Permissions mises à jour')
-            .setDescription(`Les permissions pour la commande \`${commandName}\` ont été mises à jour.`)
+            .setTitle('Configuration des permissions')
+            .setDescription(`Configurez les permissions pour la commande \`${commandName}\`.`)
             .addFields(
-                { name: 'Nouvelles permissions', value: permissions.join(', ') || 'Aucune' }
+                { name: 'Permissions actuelles', value: perms || 'Aucune' }
             )
             .setFooter(client.footer)
             .setTimestamp();
+
+        const embed = createEmbed(currentPerms);
 
         const row = new ActionRowBuilder()
             .addComponents(
                 new StringSelectMenuBuilder()
                     .setCustomId('perm-menu')
-                    .setPlaceholder('Choisissez une option')
+                    .setPlaceholder('Choisissez une ou plusieurs permissions')
+                    .setMinValues(0)
+                    .setMaxValues(12)
                     .addOptions([
                         { label: 'Permissions 1', value: 'perm1' },
                         { label: 'Permissions 2', value: 'perm2' },
@@ -52,23 +56,35 @@ module.exports = {
                     ])
             );
 
-        const msg = await message.reply({ embeds: [embed], components: [row] });
+        const clearButton = new ActionRowBuilder()
+            .addComponents(
+                new ButtonBuilder()
+                    .setCustomId('clear-perms')
+                    .setLabel('Effacer les permissions')
+                    .setStyle(ButtonStyle.Danger)
+            );
+
+        const msg = await message.reply({ embeds: [embed], components: [row, clearButton] });
 
         const filter = i => i.user.id === message.author.id;
         const collector = msg.createMessageComponentCollector({ filter, time: 60000 });
 
         collector.on('collect', async interaction => {
             if (interaction.isStringSelectMenu()) {
-                const selectedValue = interaction.values[0];
+                const selectedValues = interaction.values;
                 let currentPerms = await client.db.get(`permissions_${guildId}_${commandName.toLowerCase()}`) || '';
-                currentPerms = currentPerms.split(',');
+                currentPerms = currentPerms.split(',').filter(Boolean);
 
-                if (selectedValue === 'public' || selectedValue === 'owner') {
-                    currentPerms = [selectedValue];
-                } else if (!currentPerms.includes(selectedValue)) {
-                    currentPerms.push(selectedValue);
+                if (selectedValues.includes('public') || selectedValues.includes('owner')) {
+                    currentPerms = selectedValues.filter(value => value === 'public' || value === 'owner');
                 } else {
-                    currentPerms = currentPerms.filter(perm => perm !== selectedValue);
+                    selectedValues.forEach(value => {
+                        if (currentPerms.includes(value)) {
+                            currentPerms = currentPerms.filter(perm => perm !== value);
+                        } else {
+                            currentPerms.push(value);
+                        }
+                    });
                 }
 
                 await client.db.set(`permissions_${guildId}_${commandName.toLowerCase()}`, currentPerms.join(','));
@@ -83,7 +99,19 @@ module.exports = {
                     .setFooter(client.footer)
                     .setTimestamp();
 
-                await interaction.update({ embeds: [updatedEmbed], components: [row] });
+                await interaction.update({ embeds: [updatedEmbed], components: [row, clearButton] });
+            } else if (interaction.isButton() && interaction.customId === 'clear-perms') {
+                await client.db.delete(`permissions_${guildId}_${commandName.toLowerCase()}`);
+
+                await interaction.reply({
+                    content: 'Les permissions ont été effacées avec succès.',
+                    ephemeral: true
+                });
+
+                const updatedPerms = await client.db.get(`permissions_${guildId}_${commandName.toLowerCase()}`) || '';
+                const updatedEmbed = createEmbed(updatedPerms);
+
+                await msg.edit({ embeds: [updatedEmbed], components: [row, clearButton] });
             }
         });
 
@@ -91,4 +119,4 @@ module.exports = {
             msg.edit({ components: [] });
         });
     },
-};
+}
