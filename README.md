@@ -9,8 +9,10 @@ Le projet est toujours en cours de développement. Je ne sais pas encore si je v
 > - **change** : Permet de modifier la permission d’une commande existante.  
 
 > *Note : Certaines catégories dans la commande `help` peuvent ne pas s’afficher correctement. Il suffit d’ajouter des commandes pour les rendre visibles.*  
-
-### Commandes à venir  
-- Système de logs.  
+### Fonctionnalitée disponibles
+- Système de logs.
+- Système de perm.
+### Fonctionnalitée à venir  
 - Système de ticket.  
-- Système de backup.  
+- Système de backup.
+- Système d'antiraid.
