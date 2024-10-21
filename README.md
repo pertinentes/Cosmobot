@@ -8,10 +8,12 @@ Le projet est toujours en cours de développement. Je ne sais pas encore si je v
 > - **setperm** : Attribue une permission spécifique à un rôle pour une commande.
 > - **change** : Permet de modifier la permission d’une commande existante.  
 
-> *Note : Certaines catégories dans la commande `help` peuvent ne pas s’afficher correctement. Il suffit d’ajouter des commandes pour les rendre visibles.*  
+> *Note : Certaines catégories dans la commande `help` peuvent ne pas s’afficher correctement. Il suffit d’ajouter des commandes pour les rendre visibles.*
+> Environs 49/51 commandes disponible soit 1/4 du bot
 ### Fonctionnalitée disponibles
 - Système de logs.
 - Système de perm.
+- Commandes de base
 ### Fonctionnalitée à venir  
 - Système de ticket.  
 - Système de backup.
