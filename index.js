@@ -25,6 +25,7 @@ client.footer = {
     text: 'Cosmo',
     iconURL: `${config.images.icon}`
 }
+client.axios = axios;
 client.colors = {
     red: '#ff0000',
     green: '#00ff00',
@@ -79,6 +80,7 @@ fs.readdirSync('./src/commands').forEach(dossier => {
 fs.readdirSync('./src/events').forEach(dossier => {
     fs.readdirSync(`./src/events/${dossier}`).filter(file => file.endsWith('.js')).forEach(file => {
         const event = require(`./src/events/${dossier}/${file}`)
+        console.log(`Event chargé: ${file}`)
         if (event.once) {
             client.once(event.name, (...args) => event.execute(client, ...args))
         } else {
