@@ -1,6 +1,7 @@
 # **Cosmosbot**  
 # Je me sens comme un singe mtn ct juste un whitehall sa race 
-[whitehall](https://github.com/Ruwin-dsc/WhiteHall-Bot) jvais me foutre en l'air 
+[whitehall](https://github.com/Ruwin-dsc/WhiteHall-Bot) jvais me foutre en l'air mais bon bref je laisse quand même ici le bot utiliser le si vous voulez
+
 Remade des bots **Cosmos**, **Astro**, et **Celestia** de Naylo (si tu passes par là, je n’ai rien contre toi 👋).  
 
 Le projet est toujours en cours de développement. Je ne sais pas encore si je vais le terminer entièrement, mais je partage ce que j’ai déjà fait. Des mises à jour sont prévues toutes les 4 à 7 jours.  
